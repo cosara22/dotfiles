@@ -10,36 +10,39 @@ export EDITOR="code --wait"
 export VISUAL="code --wait"
 
 # XDG Base Directory
-export XDG_CONFIG_HOME="/home/cosara/.config"
-export XDG_DATA_HOME="/home/cosara/.local/share"
-export XDG_CACHE_HOME="/home/cosara/.cache"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
 
 # -----------------------------------------------------------------------------
 # Path Configuration
 # -----------------------------------------------------------------------------
-export PATH="/home/cosara/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Users/zeroz/bin:/mnt/c/Program Files/Git/mingw64/bin:/mnt/c/Program Files/Git/usr/local/bin:/mnt/c/Program Files/Git/usr/bin:/mnt/c/Program Files/Git/usr/bin:/mnt/c/Program Files/Git/mingw64/bin:/mnt/c/Program Files/Git/usr/bin:/mnt/c/Users/zeroz/bin:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0:/mnt/c/Windows/System32/OpenSSH:/mnt/c/Program Files/dotnet:/mnt/c/Program Files/Git/cmd:/mnt/c/Users/zeroz/AppData/Local/nvm:/mnt/c/nvm4w/nodejs:/Docker/host/bin:/mnt/c/Program Files/GitHub CLI:/mnt/c/Users/zeroz/AppData/Local/Programs/Python/Python312/Scripts:/mnt/c/Users/zeroz/AppData/Local/Programs/Python/Python312:/mnt/c/Users/zeroz/AppData/Local/Programs/Python/Launcher:/mnt/c/Users/zeroz/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/zeroz/AppData/Local/Programs/cursor/resources/app/bin:/mnt/c/Users/zeroz/AppData/Local/PowerToys/DSCModules:/mnt/c/Users/zeroz/AppData/Local/nvm:/mnt/c/nvm4w/nodejs:/mnt/c/Program Files/Git/usr/bin/vendor_perl:/mnt/c/Program Files/Git/usr/bin/core_perl"
+export PATH="$HOME/.local/bin:$PATH"
 
 # -----------------------------------------------------------------------------
 # fnm (Fast Node Manager)
 # -----------------------------------------------------------------------------
-if [ -d "/home/cosara/.local/share/fnm" ]; then
-    export FNM_DIR="/home/cosara/.local/share/fnm"
-    export PATH=":/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Users/zeroz/bin:/mnt/c/Program Files/Git/mingw64/bin:/mnt/c/Program Files/Git/usr/local/bin:/mnt/c/Program Files/Git/usr/bin:/mnt/c/Program Files/Git/usr/bin:/mnt/c/Program Files/Git/mingw64/bin:/mnt/c/Program Files/Git/usr/bin:/mnt/c/Users/zeroz/bin:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0:/mnt/c/Windows/System32/OpenSSH:/mnt/c/Program Files/dotnet:/mnt/c/Program Files/Git/cmd:/mnt/c/Users/zeroz/AppData/Local/nvm:/mnt/c/nvm4w/nodejs:/Docker/host/bin:/mnt/c/Program Files/GitHub CLI:/mnt/c/Users/zeroz/AppData/Local/Programs/Python/Python312/Scripts:/mnt/c/Users/zeroz/AppData/Local/Programs/Python/Python312:/mnt/c/Users/zeroz/AppData/Local/Programs/Python/Launcher:/mnt/c/Users/zeroz/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/zeroz/AppData/Local/Programs/cursor/resources/app/bin:/mnt/c/Users/zeroz/AppData/Local/PowerToys/DSCModules:/mnt/c/Users/zeroz/AppData/Local/nvm:/mnt/c/nvm4w/nodejs:/mnt/c/Program Files/Git/usr/bin/vendor_perl:/mnt/c/Program Files/Git/usr/bin/core_perl"
-    eval ""
+if [ -d "$HOME/.local/share/fnm" ]; then
+    export FNM_DIR="$HOME/.local/share/fnm"
+    export PATH="$FNM_DIR:$PATH"
+    eval "$(fnm env --use-on-cd)"
 fi
 
 # -----------------------------------------------------------------------------
 # uv (Python package manager)
 # -----------------------------------------------------------------------------
-if [ -f "/home/cosara/.local/bin/uv" ]; then
-    eval ""
+if [ -f "$HOME/.local/bin/uv" ]; then
+    eval "$(uv generate-shell-completion zsh)"
 fi
 
 # -----------------------------------------------------------------------------
 # pnpm
 # -----------------------------------------------------------------------------
-export PNPM_HOME="/home/cosara/.local/share/pnpm"
-export PATH=":/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Users/zeroz/bin:/mnt/c/Program Files/Git/mingw64/bin:/mnt/c/Program Files/Git/usr/local/bin:/mnt/c/Program Files/Git/usr/bin:/mnt/c/Program Files/Git/usr/bin:/mnt/c/Program Files/Git/mingw64/bin:/mnt/c/Program Files/Git/usr/bin:/mnt/c/Users/zeroz/bin:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0:/mnt/c/Windows/System32/OpenSSH:/mnt/c/Program Files/dotnet:/mnt/c/Program Files/Git/cmd:/mnt/c/Users/zeroz/AppData/Local/nvm:/mnt/c/nvm4w/nodejs:/Docker/host/bin:/mnt/c/Program Files/GitHub CLI:/mnt/c/Users/zeroz/AppData/Local/Programs/Python/Python312/Scripts:/mnt/c/Users/zeroz/AppData/Local/Programs/Python/Python312:/mnt/c/Users/zeroz/AppData/Local/Programs/Python/Launcher:/mnt/c/Users/zeroz/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/zeroz/AppData/Local/Programs/cursor/resources/app/bin:/mnt/c/Users/zeroz/AppData/Local/PowerToys/DSCModules:/mnt/c/Users/zeroz/AppData/Local/nvm:/mnt/c/nvm4w/nodejs:/mnt/c/Program Files/Git/usr/bin/vendor_perl:/mnt/c/Program Files/Git/usr/bin/core_perl"
+export PNPM_HOME="$HOME/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
 
 # -----------------------------------------------------------------------------
 # History Configuration
@@ -54,27 +57,39 @@ setopt SHARE_HISTORY
 # -----------------------------------------------------------------------------
 # Aliases
 # -----------------------------------------------------------------------------
-alias ll="ls -la"
-alias la="ls -A"
-alias l="ls -CF"
+# Navigation
+alias ll="ls -la --color=auto"
+alias la="ls -A --color=auto"
+alias l="ls -CF --color=auto"
 alias ..="cd .."
 alias ...="cd ../.."
+
+# Git
 alias gs="git status"
 alias gl="git log --oneline -10"
 alias gd="git diff"
+alias ga="git add"
+alias gc="git commit"
+alias gp="git push"
 
-# Docker aliases
+# Docker
 alias dc="docker compose"
 alias dps="docker ps"
+alias dpa="docker ps -a"
+
+# Development directories
+alias proj="cd ~/dev/projects"
+alias sand="cd ~/dev/sandbox"
+alias infra="cd ~/infrastructure"
 
 # -----------------------------------------------------------------------------
-# Prompt (simple)
+# Prompt with Git branch
 # -----------------------------------------------------------------------------
 autoload -Uz vcs_info
 precmd() { vcs_info }
 zstyle ':vcs_info:git:*' formats ' (%b)'
 setopt PROMPT_SUBST
-PROMPT='%F{cyan}%~%f%F{yellow}%f %F{green}❯%f '
+PROMPT='%F{cyan}%~%f%F{yellow}${vcs_info_msg_0_}%f %F{green}❯%f '
 
 # -----------------------------------------------------------------------------
 # Completion
