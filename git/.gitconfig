@@ -1,0 +1,26 @@
+[user]
+    name = Cosara
+    email = cosara857@gmail.com
+
+[core]
+    autocrlf = input
+    editor = code --wait
+
+[init]
+    defaultBranch = main
+
+[pull]
+    rebase = true
+
+[alias]
+    st = status
+    co = checkout
+    br = branch
+    ci = commit
+    lg = log --oneline --graph --decorate
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
